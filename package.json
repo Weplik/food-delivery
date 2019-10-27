@@ -11,7 +11,23 @@
     "eslint-config-prettier": "6.4.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "3.1.1",
+    "nodemon": "^1.19.4",
     "prettier": "1.18.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "pg": "^7.12.1",
+    "sequelize": "^5.21.1",
+    "sequelize-cli": "^5.5.1"
+  },
+  "scripts": {
+    "migration:dev": "./node_modules/.bin/sequelize-cli db:migrate --config ./config/database.js",
+    "migration:prod": "NODE_ENV=production ./node_modules/.bin/sequelize-cli db:migrate --config ./config/database.js",
+    "seed:dev": "./node_modules/.bin/sequelize-cli db:seed:all --config ./config/database.js",
+    "start": "nodemon ./server.js"
+  }
 }
