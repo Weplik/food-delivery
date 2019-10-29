@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'users',
+      tableName: 'product_items',
       underscored: true,
     }
   );
 
   ProductItem.associate = function(models) {
     ProductItem.belongsTo(models.Product, {
-      as: 'product',
+      as: 'items',
       foreignKey: {
         name: 'productId',
         allowNull: false,

@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       costPerKilo: {
-        field: 'cost_per_kilo',
         type: DataTypes.INTEGER,
         allowNull: false,
       },

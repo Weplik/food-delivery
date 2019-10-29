@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       phoneNumber: {
-        field: 'phone_number',
         type: DataTypes.STRING,
         allowNull: false,
       },

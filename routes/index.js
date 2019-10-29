@@ -4,6 +4,7 @@ const userController = require('../controllers/user');
 const clientController = require('../controllers/client');
 const clientAddressController = require('../controllers/clientAddress');
 const ingredientController = require('../controllers/ingredient');
+const productController = require('../controllers/product');
 
 router.use('/role', roleController);
 
@@ -14,5 +15,7 @@ router.use('/client', clientController);
 router.use('/clients-address', clientAddressController);
 
 router.use('/ingredient', ingredientController);
+
+router.use('/product', productController);
 
 module.exports = router;

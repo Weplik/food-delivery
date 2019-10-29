@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       isPrivateHouse: {
-        field: 'is_private_house',
         type: DataTypes.STRING,
         defaultValue: false,
       },

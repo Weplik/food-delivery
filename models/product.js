@@ -10,12 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       imageUrl: {
-        field: 'image_url',
         type: DataTypes.STRING,
         allowNull: false,
       },
       calorieContent: {
-        field: 'calorie_content',
         type: DataTypes.INTEGER,
         allowNull: false,
       },
@@ -26,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       weight: {
         type: DataTypes.INTEGER,
         allowNull: false,
+      },
+      isEnabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
     },
     {
@@ -38,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     Product.hasMany(models.ProductItem, {
       foreignKey: 'productId',
       sourceKey: 'id',
-      as: 'product',
+      as: 'items',
     });
   };
 

@@ -42,6 +42,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      isEnabled: {
+        field: 'is_enabled',
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
     });
   },
   down: queryInterface => {

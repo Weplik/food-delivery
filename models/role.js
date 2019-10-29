@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: true,
       },
       accessRights: {
-        field: 'access_rights',
         type: DataTypes.JSON,
       },
     },
