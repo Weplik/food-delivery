@@ -6,16 +6,16 @@ const clientAddressController = require('../controllers/clientAddress');
 const ingredientController = require('../controllers/ingredient');
 const productController = require('../controllers/product');
 
-router.use('/role', roleController);
+router.use('/roles', roleController);
 
-router.use('/user', userController);
+router.use('/users', userController);
 
-router.use('/client', clientController);
+router.use('/clients', clientController);
 
-router.use('/clients-address', clientAddressController);
+router.use('/clients-addresses', clientAddressController);
 
-router.use('/ingredient', ingredientController);
+router.use('/ingredients', ingredientController);
 
-router.use('/product', productController);
+router.use('/products', productController);
 
 module.exports = router;
