@@ -1,4 +1,4 @@
-const { User, Role } = require('../models');
+const { User, Role } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getUsers = async (req, res) => {

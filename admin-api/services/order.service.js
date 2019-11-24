@@ -7,7 +7,7 @@ const {
   ClientAddress,
   Courier,
   sequelize,
-} = require('../models');
+} = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getOrders = async (req, res) => {

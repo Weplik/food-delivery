@@ -1,4 +1,4 @@
-const { isConnectedToDB } = require('./models');
+const { isConnectedToDB } = require('../libs/db/models');
 
 isConnectedToDB()
   .then(() => {

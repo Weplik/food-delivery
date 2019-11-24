@@ -1,4 +1,4 @@
-const { Ingredient, Sequelize } = require('../models');
+const { Ingredient, Sequelize } = require('../../libs/db/models');
 
 const calculateProductItem = async productItems => {
   const ingredientIds = productItems.map(item => item.ingredientId);

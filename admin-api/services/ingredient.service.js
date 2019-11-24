@@ -1,4 +1,4 @@
-const { Ingredient, ProductItem } = require('../models');
+const { Ingredient, ProductItem } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getIngredients = async (req, res) => {

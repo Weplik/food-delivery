@@ -1,4 +1,4 @@
-const { Client, ClientAddress } = require('../models');
+const { Client, ClientAddress } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const createClientAddress = async (req, res) => {

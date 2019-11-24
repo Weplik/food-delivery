@@ -1,4 +1,4 @@
-const { Courier, Order, Client, ClientAddress } = require('../models');
+const { Courier, Order, Client, ClientAddress } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getCouriers = async (req, res) => {

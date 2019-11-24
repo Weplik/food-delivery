@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const basicAuth = async (req, res, next) => {
