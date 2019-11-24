@@ -7,6 +7,7 @@ const ingredientController = require('../controllers/ingredient.controller');
 const productController = require('../controllers/product.controller');
 const orderController = require('../controllers/order.controller');
 const authController = require('../controllers/auth.controller');
+const courierController = require('../controllers/courier.controller');
 const basicAuth = require('../middlewares/basicAuth');
 
 router.use('/roles', basicAuth, roleController);
@@ -24,5 +25,7 @@ router.use('/products', basicAuth, productController);
 router.use('/orders', basicAuth, orderController);
 
 router.use('/auth', basicAuth, authController);
+
+router.use('/couriers', basicAuth, courierController);
 
 module.exports = router;

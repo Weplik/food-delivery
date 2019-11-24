@@ -40,6 +40,12 @@ module.exports = (sequelize, DataTypes) => {
       sourceKey: 'id',
       as: 'address',
     });
+
+    Order.belongsTo(models.Courier, {
+      foreignKey: 'courier_id',
+      sourceKey: 'id',
+      as: 'courier',
+    });
   };
 
   return Order;
