@@ -44,8 +44,6 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.isCorrectPassword = function(password) {
-    console.log(password);
-    console.log(this.password);
     return bcrypt.compare(password, this.password);
   };
 

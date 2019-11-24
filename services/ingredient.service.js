@@ -37,7 +37,7 @@ const updateIngredient = async (req, res) => {
   return res.json(existIngredient);
 };
 
-const deleteIngredient = async (req, res) => {
+const disableIngredient = async (req, res) => {
   const id = req.params;
 
   const existIngredient = await Ingredient.findByPk(id);
@@ -52,11 +52,33 @@ const deleteIngredient = async (req, res) => {
     throw new RequestError(400, 'Ingredient is busy');
   }
 
+  existIngredient.set('isEnabled', false);
 
-}
+  await existIngredient.save();
+
+  return res.json(existIngredient);
+};
+
+const enableIngredient = async (req, res) => {
+  const id = req.params;
+
+  const existIngredient = await Ingredient.findByPk(id);
+
+  if (!existIngredient) {
+    throw new RequestError(404, 'Ingredient not found');
+  }
+
+  existIngredient.set('isEnabled', true);
+
+  await existIngredient.save();
+
+  return res.json(existIngredient);
+};
 
 module.exports = {
   getIngredients,
   createIngredient,
   updateIngredient,
+  disableIngredient,
+  enableIngredient,
 };

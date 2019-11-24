@@ -7,4 +7,8 @@ router.post('/', service.createIngredient);
 
 router.put('/', service.updateIngredient);
 
+router.put('/:id/disable', service.disableIngredient);
+
+router.put('/:id/enable', service.enableIngredient);
+
 module.exports = router;
