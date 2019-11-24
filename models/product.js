@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      primeCost: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       weight: {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -1,4 +1,5 @@
 const { Product, ProductItem, sequelize, Ingredient } = require('../models');
+const { calculateProductItem } = require('../utils/product.utils');
 const RequestError = require('../helpers/requestError');
 
 const getProducts = async (req, res) => {
@@ -28,6 +29,16 @@ const getProducts = async (req, res) => {
 
 const createProduct = async (req, res) => {
   const { items, ...product } = req.body;
+
+  await calculateProductItem(items);
+
+  product.primeCost = items
+    .map(item => item.primeCost)
+    .reduce((total, value) => total + value);
+
+  product.weight = items
+    .map(item => item.weight)
+    .reduce((total, value) => total + value);
 
   const savedProduct = await sequelize.transaction(transaction =>
     Product.create(
@@ -65,6 +76,16 @@ const updateProduct = async (req, res) => {
     productId: id,
     weight: item.weight,
   }));
+
+  await calculateProductItem(newItems);
+
+  product.primeCost = newItems
+    .map(item => item.primeCost)
+    .reduce((total, value) => total + value);
+
+  product.weight = newItems
+    .map(item => item.weight)
+    .reduce((total, value) => total + value);
 
   // TODO I don't know how it's do otherwise
   await sequelize.transaction(transaction =>
