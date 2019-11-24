@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const { PASSWORD: config } = require('../config/constants');
+
 module.exports = (sequelize, DataTypes) => {
   const Client = sequelize.define(
     'Client',
@@ -13,6 +16,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      password: {
+        type: DataTypes.STRING,
+      },
+      email: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
     },
     {
       tableName: 'clients',
@@ -27,6 +37,48 @@ module.exports = (sequelize, DataTypes) => {
       as: 'addresses',
     });
   };
+
+  Client.prototype.isCorrectPassword = function(password) {
+    return bcrypt.compare(password, this.password);
+  };
+
+  Client.beforeCreate(
+    (client, options) =>
+      new Promise((resolve, reject) => {
+        if (!client.password) {
+          resolve(client, options);
+        }
+
+        bcrypt.hash(client.password, config.salt, (err, hash) => {
+          if (err) {
+            reject(err);
+          } else {
+            // eslint-disable-next-line no-param-reassign
+            client.password = hash;
+            resolve(client, options);
+          }
+        });
+      })
+  );
+
+  Client.beforeUpdate(
+    (client, options) =>
+      new Promise((resolve, reject) => {
+        if (!client.password) {
+          resolve(client, options);
+        }
+
+        bcrypt.hash(client.password, config.salt, (err, hash) => {
+          if (err) {
+            reject(err);
+          } else {
+            // eslint-disable-next-line no-param-reassign
+            client.password = hash;
+            resolve(client, options);
+          }
+        });
+      })
+  );
 
   return Client;
 };

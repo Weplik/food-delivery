@@ -24,25 +24,25 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Order.belongsTo(models.User, {
-      foreignKey: 'operator_username',
+      foreignKey: 'operatorUsername',
       sourceKey: 'username',
       as: 'operator',
     });
 
     Order.belongsTo(models.Client, {
-      foreignKey: 'client_id',
+      foreignKey: 'clientId',
       sourceKey: 'id',
       as: 'client',
     });
 
     Order.belongsTo(models.ClientAddress, {
-      foreignKey: 'client_address_id',
+      foreignKey: 'clientAddressId',
       sourceKey: 'id',
       as: 'address',
     });
 
     Order.belongsTo(models.Courier, {
-      foreignKey: 'courier_id',
+      foreignKey: 'courierId',
       sourceKey: 'id',
       as: 'courier',
     });

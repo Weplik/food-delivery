@@ -45,9 +45,6 @@ const getOrders = async (req, res) => {
         as: 'courier',
       },
     ],
-    attributes: {
-      exclude: ['operator_username', 'client_id', 'client_address_id', 'courier_id'],
-    },
     limit,
     offset,
   });
@@ -113,9 +110,6 @@ const toggleStatus = async (req, res) => {
         as: 'address',
       },
     ],
-    attributes: {
-      exclude: ['operator_username', 'client_id', 'client_address_id'],
-    },
   });
 
   if (!existOrder) {
