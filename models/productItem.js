@@ -14,20 +14,18 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   ProductItem.associate = function(models) {
+    ProductItem.belongsTo(models.Ingredient, {
+      foreignKey: 'ingredientId',
+      sourceKey: 'id',
+      as: 'ingredient',
+    });
+
     ProductItem.belongsTo(models.Product, {
       as: 'items',
       foreignKey: {
         name: 'productId',
         allowNull: false,
       },
-    });
-  };
-
-  ProductItem.associate = function(models) {
-    ProductItem.belongsTo(models.Ingredient, {
-      foreignKey: 'ingredientId',
-      sourceKey: 'id',
-      as: 'ingredient',
     });
   };
 

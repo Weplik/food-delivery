@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const service = require('../services/clientAddress');
+const service = require('../services/clientAddress.service');
 
 router.post('/', service.createClientAddress);
 
