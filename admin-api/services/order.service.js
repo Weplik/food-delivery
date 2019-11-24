@@ -5,6 +5,7 @@ const {
   Product,
   Client,
   ClientAddress,
+  Courier,
   sequelize,
 } = require('../models');
 const RequestError = require('../helpers/requestError');
@@ -39,9 +40,13 @@ const getOrders = async (req, res) => {
         model: ClientAddress,
         as: 'address',
       },
+      {
+        model: Courier,
+        as: 'courier',
+      },
     ],
     attributes: {
-      exclude: ['operator_username', 'client_id', 'client_address_id'],
+      exclude: ['operator_username', 'client_id', 'client_address_id', 'courier_id'],
     },
     limit,
     offset,
@@ -77,7 +82,7 @@ const createOrder = async (req, res) => {
 };
 
 const toggleStatus = async (req, res) => {
-  const { status } = req.body;
+  const { status, courierId } = req.body;
   const { id: orderId } = req.params;
 
   const existOrder = await Order.findByPk(orderId, {
@@ -118,6 +123,10 @@ const toggleStatus = async (req, res) => {
   }
 
   existOrder.set('status', status);
+
+  if (courierId) {
+    existOrder.set('courierId', courierId);
+  }
 
   await existOrder.save();
 
