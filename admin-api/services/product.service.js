@@ -1,4 +1,9 @@
-const { Product, ProductItem, sequelize, Ingredient } = require('../../libs/db/models');
+const {
+  Product,
+  ProductItem,
+  sequelize,
+  Ingredient,
+} = require('../../libs/db/models');
 const { calculateProductItem } = require('../utils/product.utils');
 const RequestError = require('../helpers/requestError');
 
