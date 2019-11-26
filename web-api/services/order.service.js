@@ -3,6 +3,7 @@ const {
   OrderItem,
   Product,
   ClientAddress,
+  sequelize,
 } = require('../../libs/db/models');
 
 const getOrders = async (req, res) => {
@@ -41,6 +42,33 @@ const getOrders = async (req, res) => {
   return res.json({ orders, count });
 };
 
+const createOrder = async (req, res) => {
+  const { items, ...order } = req.body;
+  const { id: clientId } = req.user;
+
+  const savedOrder = await sequelize.transaction(transaction =>
+    Order.create(
+      {
+        ...order,
+        clientId,
+        items,
+      },
+      {
+        include: [
+          {
+            model: OrderItem,
+            as: 'items',
+          },
+        ],
+        transaction,
+      }
+    )
+  );
+
+  return res.json(savedOrder);
+};
+
 module.exports = {
   getOrders,
+  createOrder,
 };

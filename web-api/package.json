@@ -26,6 +26,6 @@
     "winston": "^3.2.1"
   },
   "scripts": {
-    "start": "nodemon ./server.js"
+    "start": "nodemon -L ./server.js"
   }
 }
