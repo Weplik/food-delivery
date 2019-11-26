@@ -1,0 +1,75 @@
+version: '2.1'
+
+services:
+  postgres:
+    image: postgres:9.6
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data:rw,z
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: '${POSTGRES_USER}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+      POSTGRES_DB: '${POSTGRES_DB}'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 5s
+      timeout: 5s
+      retries: 40
+
+  migrations:
+    image: node:10
+    volumes:
+      - ./libs/db:/db:rw,z
+    environment:
+      POSTGRES_USER: '${POSTGRES_USER}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+      POSTGRES_DB: '${POSTGRES_DB}'
+      POSTGRES_HOST: '${POSTGRES_HOST}'
+      POSTGRES_PORT: '${POSTGRES_PORT}'
+    working_dir: /db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      bash -c 'yarn install && yarn migration'
+
+  admin-api:
+    image: node:10
+    volumes:
+      - ./:/app:rw,z
+    ports:
+      - 8000:8000
+    environment:
+      NODE_ENV: '${NODE_ENV}'
+      POSTGRES_USER: '${POSTGRES_USER}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+      POSTGRES_DB: '${POSTGRES_DB}'
+      POSTGRES_HOST: '${POSTGRES_HOST}'
+      POSTGRES_PORT: '${POSTGRES_PORT}'
+    working_dir: /app/admin-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      bash -c 'yarn install && yarn start'
+
+  web-api:
+    image: node:10
+    volumes:
+      - ./:/app:rw,z
+    ports:
+      - 8001:8000
+    environment:
+      NODE_ENV: '${NODE_ENV}'
+      POSTGRES_USER: '${POSTGRES_USER}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD}'
+      POSTGRES_DB: '${POSTGRES_DB}'
+      POSTGRES_HOST: '${POSTGRES_HOST}'
+      POSTGRES_PORT: '${POSTGRES_PORT}'
+    working_dir: /app/web-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      bash -c 'yarn install && yarn start'
