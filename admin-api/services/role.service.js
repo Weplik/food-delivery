@@ -1,10 +1,17 @@
-const { Role, User } = require('../../libs/db/models');
+const { Role, User, Sequelize: { Op } } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getRoles = async (req, res) => {
-  const { limit = 20, offset = 0 } = req.query;
+  const { limit = 20, offset = 0, title } = req.query;
+  const where = {};
 
-  const { rows: roles, count } = await Role.findAndCountAll({ limit, offset });
+  if (title) {
+    where.title = {
+      [Op.like]: `%${title}%`,
+    };
+  }
+
+  const { rows: roles, count } = await Role.findAndCountAll({ where, limit, offset });
 
   return res.json({ roles, count });
 };

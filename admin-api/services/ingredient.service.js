@@ -1,10 +1,22 @@
-const { Ingredient, ProductItem } = require('../../libs/db/models');
+const {
+  Ingredient,
+  ProductItem,
+  Sequelize: { Op },
+} = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getIngredients = async (req, res) => {
-  const { limit = 20, offset = 0 } = req.query;
+  const { limit = 20, offset = 0, title } = req.query;
+  const where = {};
+
+  if (title) {
+    where.title = {
+      [Op.like]: `%${title}%`,
+    };
+  }
 
   const { rows: ingredients, count } = await Ingredient.findAndCountAll({
+    where,
     limit,
     offset,
   });

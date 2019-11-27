@@ -1,8 +1,42 @@
-const { User, Role } = require('../../libs/db/models');
+const {
+  User,
+  Role,
+  Sequelize: { Op },
+} = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getUsers = async (req, res) => {
-  const { limit = 20, offset = 0 } = req.query;
+  const {
+    limit = 20,
+    offset = 0,
+    username,
+    firstname,
+    lastname,
+    roleId,
+  } = req.query;
+  const where = {};
+
+  if (username) {
+    where.username = {
+      [Op.like]: `%${username}%`,
+    };
+  }
+
+  if (firstname) {
+    where.firstname = {
+      [Op.like]: `%${firstname}%`,
+    };
+  }
+
+  if (lastname) {
+    where.lastname = {
+      [Op.like]: `%${lastname}%`,
+    };
+  }
+
+  if (roleId) {
+    where.roleId = roleId;
+  }
 
   const { rows: users, count } = await User.findAndCountAll({
     include: [
@@ -15,6 +49,7 @@ const getUsers = async (req, res) => {
     attributes: {
       exclude: ['password', 'roleId'],
     },
+    where,
     limit,
     offset,
   });
