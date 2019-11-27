@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-export const rolesService = { getList };
+export const usersService = { getList };
 
 async function getList(params) {
   const requestOptions = {
     method: 'GET',
-    url: '/api/roles',
+    url: '/api/users',
     params,
   };
 

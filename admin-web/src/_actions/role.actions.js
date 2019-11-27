@@ -1,5 +1,5 @@
 import { rolesConstants } from '../_constants/role.constans';
-import { roleService } from '../_services';
+import { rolesService } from '../_services';
 
 export const rolesActions = {
   getList,
@@ -17,7 +17,8 @@ function getList(values) {
     dispatch(request(values));
 
     try {
-      const data = await roleService.getList(values);
+      const { limit, offset } = values;
+      const data = await rolesService.getList({ limit, offset });
       dispatch(success(data));
     } catch (err) {
       dispatch(failure(err.toString()));

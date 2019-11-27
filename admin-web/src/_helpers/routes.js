@@ -14,9 +14,13 @@ export const routes = List([
     isPublic: true,
   },
   {
+    path: '/products-management',
+    title: 'Управление продуктами',
+    accessRights: ['products_management'],
+  },
+  {
     path: '/users-management',
     title: 'Управление пользователями',
     accessRights: ['users_management'],
-    isPublic: true,
   },
 ]);

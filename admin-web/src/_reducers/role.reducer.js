@@ -7,7 +7,7 @@ const initialState = {
   params: {
     offset: 0,
     page: 1,
-    limit: 1,
+    limit: 20,
   },
 };
 

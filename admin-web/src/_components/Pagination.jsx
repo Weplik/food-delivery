@@ -15,7 +15,6 @@ export const Pagination = props => {
       page={currentPage - 1}
       rowsPerPage={perPage}
       onChangePage={handleChangePage}
-      labelRowsPerPage="Строк на странице"
       rowsPerPageOptions={[perPage]}
     />
   );

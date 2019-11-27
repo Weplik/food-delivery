@@ -2,20 +2,22 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Table, TableBody } from '@material-ui/core';
 import { TbodyTr } from './TbodyTr';
-import { rolesActions } from '../../../_actions';
+import { ingredientsActions } from '../../../_actions';
 import { Thead } from './Thead';
 import { RootPaper } from '../../../_containers/RootPaper';
 import { Pagination } from '../../../_components';
 
-const TableBlock = ({ dispatch, roles, count, params }) => {
+const TableBlock = ({ dispatch, ingredients, count, params }) => {
   useEffect(() => {
-    dispatch(rolesActions.getList(params));
+    dispatch(ingredientsActions.getList(params));
   }, []);
 
   const handleChangePage = page => {
     const { limit } = params;
 
-    dispatch(rolesActions.getList({ offset: limit * (page - 1), limit, page }));
+    dispatch(
+      ingredientsActions.getList({ offset: limit * (page - 1), limit, page })
+    );
   };
 
   return (
@@ -23,8 +25,8 @@ const TableBlock = ({ dispatch, roles, count, params }) => {
       <Table>
         <Thead />
         <TableBody>
-          {roles.map(role => (
-            <TbodyTr key={role.id} role={role} />
+          {ingredients.map(ingredient => (
+            <TbodyTr key={ingredient.id} user={ingredient} />
           ))}
         </TableBody>
       </Table>
@@ -39,8 +41,8 @@ const TableBlock = ({ dispatch, roles, count, params }) => {
 };
 
 const mapStateToProps = state => {
-  const { roles, count, params } = state.role;
-  return { roles, count, params };
+  const { ingredients, count, params } = state.ingredient;
+  return { ingredients, count, params };
 };
 
 export default connect(mapStateToProps)(TableBlock);
