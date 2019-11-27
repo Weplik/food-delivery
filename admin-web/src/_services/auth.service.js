@@ -11,5 +11,7 @@ async function signIn(values) {
 
   const { data } = await axios(requestOptions);
 
+  axios.defaults.auth = values;
+
   return data;
 }

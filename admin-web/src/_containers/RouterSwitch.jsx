@@ -8,36 +8,39 @@ import { PrivateRoute } from '../_components';
 
 const RouterSwitch = ({ user }) => {
   return (
-    <Switch>
-      {routes
-        .filter(
-          route =>
-            !isEmpty(user) &&
-            !route.isPublic &&
-            route.accessRights &&
-            intersection(route.accessRights, user.role.accessRights)
-        )
-        .map(route => (
-          <PrivateRoute
-            key={route.path}
-            exact
-            path={route.path}
-            component={routeComponents.get(route.path)}
-          />
-        ))}
-      {routes
-        .filter(route => route.isPublic)
-        .map(route => (
-          <Route
-            key={route.path}
-            path={route.path}
-            component={routeComponents.get(route.path)}
-          />
-        ))}
-      {isEmpty(user) && <Redirect to="/sign-in" />}
+    <>
+      <Switch>
+        {routes
+          .filter(
+            route =>
+              !isEmpty(user) &&
+              !route.isPublic &&
+              route.accessRights &&
+              intersection(route.accessRights, user.role.accessRights)
+          )
+          .map(route => (
+            <PrivateRoute
+              key={route.path}
+              exact
+              path={route.path}
+              component={routeComponents.get(route.path)}
+            />
+          ))}
+        {routes
+          .filter(route => route.isPublic)
+          .map(route => (
+            <Route
+              key={route.path}
+              path={route.path}
+              component={routeComponents.get(route.path)}
+            />
+          ))}
+      </Switch>
+
       {!isEmpty(user) && <Redirect from="/sign-in" to="/dashboard" />}
       {!isEmpty(user) && <Redirect from="/" to="/dashboard" />}
-    </Switch>
+      {isEmpty(user) && <Redirect from="/users-management" to="/sign-in" />}
+    </>
   );
 };
 
