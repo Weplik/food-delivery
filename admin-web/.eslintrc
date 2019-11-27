@@ -1,0 +1,45 @@
+{
+  "extends": ["airbnb", "plugin:prettier/recommended", "react-app"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-use-before-define": ["error", { "functions": false }],
+    "global-require": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
+    "react/prop-types": "off",
+    "no-param-reassign": "off",
+    "no-unused-expressions": ["error", { "allowTernary": true }],
+    "no-underscore-dangle": "off",
+    "jsx-a11y/media-has-caption": "off",
+    "camelcase": "off",
+    "no-template-curly-in-string": "off",
+    "react/jsx-wrap-multilines": "off",
+    "no-continue": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "no-console": "error",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "react/no-array-index-key": "off",
+    "no-await-in-loop": "off",
+    "jsx-a11y/mouse-events-have-key-events": "off"
+  }
+}

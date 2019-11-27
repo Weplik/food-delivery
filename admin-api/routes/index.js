@@ -24,7 +24,7 @@ router.use('/products', basicAuth, productController);
 
 router.use('/orders', basicAuth, orderController);
 
-router.use('/auth', basicAuth, authController);
+router.use('/auth', authController);
 
 router.use('/couriers', basicAuth, courierController);
 

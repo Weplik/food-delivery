@@ -1,13 +1,26 @@
-const { User } = require('../../libs/db/models');
+const { User, Role } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
-const login = async (req, res) => {
+const signIn = async (req, res) => {
   const { username, password } = req.body;
 
-  const user = await User.findByPk(username);
+  const user = await User.findByPk(username, {
+    include: [
+      {
+        model: Role,
+        as: 'role',
+        attributes: {
+          include: ['id', 'accessRights'],
+        },
+      },
+    ],
+    attributes: {
+      exclude: ['roleId'],
+    },
+  });
 
   if (!user) {
-    throw new RequestError(404, 'Client not found');
+    throw new RequestError(404, 'User not found');
   }
 
   const isCorrectPassword = await user.isCorrectPassword(password);
@@ -16,9 +29,11 @@ const login = async (req, res) => {
     throw new RequestError(401, 'Wrong password');
   }
 
+  delete user.dataValues.password;
+
   return res.json(user);
 };
 
 module.exports = {
-  login,
+  signIn,
 };
