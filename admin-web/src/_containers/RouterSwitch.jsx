@@ -36,7 +36,6 @@ const RouterSwitch = ({ user }) => {
             />
           ))}
       </Switch>
-
       {!isEmpty(user) && <Redirect from="/sign-in" to="/dashboard" />}
       {!isEmpty(user) && <Redirect from="/" to="/dashboard" />}
       {isEmpty(user) && <Redirect from="/users-management" to="/sign-in" />}

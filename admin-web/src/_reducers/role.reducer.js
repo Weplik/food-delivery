@@ -4,13 +4,17 @@ import { rolesConstants } from '../_constants';
 const initialState = {
   roles: [],
   count: 0,
-  offset: 0,
-  limit: 20,
+  params: {
+    offset: 0,
+    page: 1,
+    limit: 1,
+  },
 };
 
 export const role = createReducer(initialState, {
   [rolesConstants.ROLES_LIST_REQUEST]: (state, action) => ({
     ...state,
+    params: action.params,
   }),
   [rolesConstants.ROLES_LIST_SUCCESS]: (state, action) => ({
     ...state,
