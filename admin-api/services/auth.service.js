@@ -1,5 +1,6 @@
 const { User, Role } = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
+const tokenUtils = require('../utils/token.utils');
 
 const signIn = async (req, res) => {
   const { username, password } = req.body;
@@ -29,9 +30,11 @@ const signIn = async (req, res) => {
     throw new RequestError(401, 'Wrong password');
   }
 
+  const accessToken = tokenUtils.generateAccessToken(user.username);
+
   delete user.dataValues.password;
 
-  return res.json(user);
+  return res.json({ user, accessToken });
 };
 
 module.exports = {

@@ -8,24 +8,24 @@ const productController = require('../controllers/product.controller');
 const orderController = require('../controllers/order.controller');
 const authController = require('../controllers/auth.controller');
 const courierController = require('../controllers/courier.controller');
-const basicAuth = require('../middlewares/basicAuth');
+const jwtAuth = require('../middlewares/jwtAuth');
 
-router.use('/roles', basicAuth, roleController);
+router.use('/roles', jwtAuth, roleController);
 
-router.use('/users', basicAuth, userController);
+router.use('/users', jwtAuth, userController);
 
-router.use('/clients', basicAuth, clientController);
+router.use('/clients', jwtAuth, clientController);
 
-router.use('/clients-addresses', basicAuth, clientAddressController);
+router.use('/clients-addresses', jwtAuth, clientAddressController);
 
-router.use('/ingredients', basicAuth, ingredientController);
+router.use('/ingredients', jwtAuth, ingredientController);
 
-router.use('/products', basicAuth, productController);
+router.use('/products', jwtAuth, productController);
 
-router.use('/orders', basicAuth, orderController);
+router.use('/orders', jwtAuth, orderController);
 
 router.use('/auth', authController);
 
-router.use('/couriers', basicAuth, courierController);
+router.use('/couriers', jwtAuth, courierController);
 
 module.exports = router;
