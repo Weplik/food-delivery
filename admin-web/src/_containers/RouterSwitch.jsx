@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { intersection, isEmpty } from 'lodash';
 import { routes } from '../_helpers';
 import { routeComponents } from '../_helpers/route-components';
 import { PrivateRoute } from '../_components';
+import { authActions } from '../_actions';
 
-const RouterSwitch = ({ user }) => {
+const RouterSwitch = ({ dispatch, user }) => {
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      dispatch(authActions.info());
+    }
+  }, []);
   return (
     <>
       <Switch>

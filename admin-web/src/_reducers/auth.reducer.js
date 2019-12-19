@@ -3,14 +3,12 @@ import { authConstants } from '../_constants';
 import { authActions } from '../_actions';
 
 const initialState = {
-  credentials: {},
   user: {},
 };
 
 export const auth = createReducer(initialState, {
-  [authConstants.SIGN_IN_REQUEST]: (state, action) => ({
+  [authConstants.SIGN_IN_REQUEST]: state => ({
     ...state,
-    credentials: action.credentials,
   }),
   [authConstants.SIGN_IN_SUCCESS]: (state, action) => ({
     ...state,
@@ -18,11 +16,19 @@ export const auth = createReducer(initialState, {
   }),
   [authConstants.SIGN_IN_FAILURE]: state => ({
     ...state,
-    credentials: {},
+  }),
+  [authConstants.INFO_REQUEST]: state => ({
+    ...state,
+  }),
+  [authConstants.INFO_SUCCESS]: (state, action) => ({
+    ...state,
+    user: action.user,
+  }),
+  [authConstants.INFO_FAILURE]: state => ({
+    ...state,
   }),
   [authActions.logout]: state => ({
     ...state,
-    credentials: {},
     user: {},
   }),
 });

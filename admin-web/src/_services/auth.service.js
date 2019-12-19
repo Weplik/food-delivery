@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const authService = { signIn };
+export const authService = { signIn, info };
 
 async function signIn(values) {
   const requestOptions = {
@@ -11,7 +11,18 @@ async function signIn(values) {
 
   const { data } = await axios(requestOptions);
 
-  axios.defaults.auth = values;
+  localStorage.setItem('accessToken', data.accessToken);
+
+  return data.user;
+}
+
+async function info() {
+  const requestOptions = {
+    method: 'GET',
+    url: '/api/auth/info',
+  };
+
+  const { data } = await axios(requestOptions);
 
   return data;
 }

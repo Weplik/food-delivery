@@ -37,6 +37,28 @@ const signIn = async (req, res) => {
   return res.json({ user, accessToken });
 };
 
+const info = async (req, res) => {
+  const { username } = req.user;
+
+  const user = await User.findByPk(username, {
+    include: [
+      {
+        model: Role,
+        as: 'role',
+        attributes: {
+          include: ['id', 'accessRights'],
+        },
+      },
+    ],
+    attributes: {
+      exclude: ['roleId', 'password'],
+    },
+  });
+
+  return res.json(user);
+};
+
 module.exports = {
   signIn,
+  info,
 };

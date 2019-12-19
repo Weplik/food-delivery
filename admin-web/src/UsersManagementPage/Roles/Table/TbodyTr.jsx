@@ -13,7 +13,7 @@ export const TbodyTr = ({ role }) => (
         <Typography>{right.title}</Typography>
       ))}
     </TableCell>
-    <TableCell>{role.isEnabled ? 'Активна' : 'Заблокирована'}</TableCell>
+    <TableCell>{role.enabled ? 'Активна' : 'Заблокирована'}</TableCell>
     <TableCell>Опции</TableCell>
   </TableRow>
 );
