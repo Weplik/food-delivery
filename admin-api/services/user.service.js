@@ -60,7 +60,7 @@ const getUsers = async (req, res) => {
 const createUser = async (req, res) => {
   const user = req.body;
 
-  const { username } = await User.create(user);
+  const { username } = await User.create({ ...user, roleId: user.role.id });
 
   const createdUser = await User.findByPk(username, {
     include: [
@@ -88,7 +88,7 @@ const updateUser = async (req, res) => {
     throw new RequestError(404, 'User not found');
   }
 
-  const existRole = await Role.findByPk(user.roleId, {
+  const existRole = await Role.findByPk(user.role.id, {
     attributes: ['id', 'title', 'enabled'],
   });
 
@@ -98,7 +98,7 @@ const updateUser = async (req, res) => {
 
   existUser.set('firstname', user.firstname);
   existUser.set('lastname', user.lastname);
-  existUser.set('roleId', user.roleId);
+  existUser.set('roleId', user.role.id);
 
   await existUser.save();
 

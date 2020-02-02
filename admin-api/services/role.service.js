@@ -1,4 +1,8 @@
-const { Role, User, Sequelize: { Op } } = require('../../libs/db/models');
+const {
+  Role,
+  User,
+  Sequelize: { Op },
+} = require('../../libs/db/models');
 const RequestError = require('../helpers/requestError');
 
 const getRoles = async (req, res) => {
@@ -11,7 +15,11 @@ const getRoles = async (req, res) => {
     };
   }
 
-  const { rows: roles, count } = await Role.findAndCountAll({ where, limit, offset });
+  const { rows: roles, count } = await Role.findAndCountAll({
+    where,
+    limit,
+    offset,
+  });
 
   return res.json({ roles, count });
 };
@@ -57,7 +65,7 @@ const disableRole = async (req, res) => {
     throw new RequestError(400, 'Role is busy');
   }
 
-  existRole.set('isEnabled', false);
+  existRole.set('enabled', false);
 
   await existRole.save();
 
@@ -73,11 +81,19 @@ const enableRole = async (req, res) => {
     throw new RequestError(404, 'Role not found');
   }
 
-  existRole.set('isEnabled', true);
+  existRole.set('enabled', true);
 
   await existRole.save();
 
   return res.json(existRole);
+};
+
+const getActiveRoles = async (req, res) => {
+  const roles = await Role.findAll({
+    where: { enabled: true },
+  });
+
+  return res.json(roles);
 };
 
 module.exports = {
@@ -86,4 +102,5 @@ module.exports = {
   updateRole,
   disableRole,
   enableRole,
+  getActiveRoles,
 };

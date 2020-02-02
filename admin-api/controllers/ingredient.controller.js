@@ -5,7 +5,7 @@ router.get('/', service.getIngredients);
 
 router.post('/', service.createIngredient);
 
-router.put('/', service.updateIngredient);
+router.put('/:id', service.updateIngredient);
 
 router.put('/:id/disable', service.disableIngredient);
 

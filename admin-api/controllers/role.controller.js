@@ -11,4 +11,6 @@ router.put('/:id/disable', service.disableRole);
 
 router.put('/:id/enable', service.enableRole);
 
+router.get('/active', service.getActiveRoles);
+
 module.exports = router;

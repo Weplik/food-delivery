@@ -36,7 +36,8 @@ const createIngredient = async (req, res) => {
 };
 
 const updateIngredient = async (req, res) => {
-  const { id, ...ingredient } = req.body;
+  const ingredient = req.body;
+  const { id } = req.params;
 
   const existIngredient = await Ingredient.findByPk(id);
 
@@ -50,7 +51,7 @@ const updateIngredient = async (req, res) => {
 };
 
 const disableIngredient = async (req, res) => {
-  const id = req.params;
+  const { id } = req.params;
 
   const existIngredient = await Ingredient.findByPk(id);
 
@@ -72,7 +73,7 @@ const disableIngredient = async (req, res) => {
 };
 
 const enableIngredient = async (req, res) => {
-  const id = req.params;
+  const { id } = req.params;
 
   const existIngredient = await Ingredient.findByPk(id);
 
