@@ -9,9 +9,14 @@ const getClients = async (req, res) => {
       {
         model: ClientAddress,
         as: 'addresses',
-        attributes: ['id', 'address'],
+        attributes: {
+          exclude: ['clientId'],
+        },
       },
     ],
+    attributes: {
+      exclude: ['password'],
+    },
     limit,
     offset,
   });

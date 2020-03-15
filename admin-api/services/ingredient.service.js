@@ -88,10 +88,19 @@ const enableIngredient = async (req, res) => {
   return res.json(existIngredient);
 };
 
+const getActiveIngredients = async (req, res) => {
+  const ingredients = await Ingredient.findAll({
+    where: { isEnabled: true },
+  });
+
+  return res.json(ingredients);
+};
+
 module.exports = {
   getIngredients,
   createIngredient,
   updateIngredient,
   disableIngredient,
   enableIngredient,
+  getActiveIngredients,
 };

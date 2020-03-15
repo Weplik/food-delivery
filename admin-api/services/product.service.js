@@ -10,7 +10,7 @@ const RequestError = require('../helpers/requestError');
 const getProducts = async (req, res) => {
   const { limit = 20, offset = 0 } = req.query;
 
-  const products = await Product.findAndCountAll({
+  const { rows: products, count } = await Product.findAndCountAll({
     include: [
       {
         model: ProductItem,
@@ -29,7 +29,7 @@ const getProducts = async (req, res) => {
     offset,
   });
 
-  return res.json(products);
+  return res.json({ products, count });
 };
 
 const createProduct = async (req, res) => {

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       isPrivateHouse: {
-        type: DataTypes.STRING,
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
       isEnabled: {

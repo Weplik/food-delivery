@@ -22,7 +22,7 @@ module.exports = {
       },
       isPrivateHouse: {
         field: 'is_private_house',
-        type: Sequelize.STRING,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       clientId: {

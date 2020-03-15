@@ -11,4 +11,6 @@ router.put('/:id/disable', service.disableIngredient);
 
 router.put('/:id/enable', service.enableIngredient);
 
+router.get('/active', service.getActiveIngredients);
+
 module.exports = router;

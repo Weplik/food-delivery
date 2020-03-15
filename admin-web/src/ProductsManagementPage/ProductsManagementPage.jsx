@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Tabs, Tab } from '@material-ui/core';
-import { IngredientsPage} from "./Ingredients";
+import { IngredientsPage } from './Ingredients';
+import { ProductPage } from './Products';
 
 export const ProductsManagementPage = () => {
   const [currentTab, setTab] = useState('ingredients');
@@ -9,6 +10,10 @@ export const ProductsManagementPage = () => {
     {
       value: 'ingredients',
       title: 'Управление ингредиентами',
+    },
+    {
+      value: 'products',
+      title: 'Управление продуктами',
     },
   ];
 
@@ -24,6 +29,7 @@ export const ProductsManagementPage = () => {
         ))}
       </Tabs>
       {currentTab === 'ingredients' && <IngredientsPage />}
+      {currentTab === 'products' && <ProductPage />}
     </Container>
   );
 };
